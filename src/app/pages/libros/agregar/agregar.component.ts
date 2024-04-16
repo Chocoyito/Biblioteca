@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar',
@@ -12,6 +13,7 @@ export class AgregarComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +32,10 @@ export class AgregarComponent implements OnInit {
 
   onSubmit() {
     console.log(this.libroForm.value);
+  }
+
+  volver(){
+    this.router.navigate(['dashboard'])
   }
 
 }

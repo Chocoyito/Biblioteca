@@ -28,9 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  procesarDatos(){
-    console.log(this.loginForm);
-    
+  procesarDatos(){    
     if (this.loginForm.get('usuario')?.value == "Papu" && this.loginForm.get('contrasena')?.value == '123') {
 
       this.router.navigate(['dashboard'])

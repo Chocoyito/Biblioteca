@@ -1,0 +1,40 @@
+<form [formGroup]="libroForm" (ngSubmit)="onSubmit()">
+  <div class="flex flex-col justify-center px-8">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Titulo</mat-label>
+      <input matInput formControlName="titulo">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Autor</mat-label>
+      <input matInput formControlName="autor">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Año de edición</mat-label>
+      <input matInput formControlName="anoEdicion">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Género</mat-label>
+      <input matInput formControlName="genero">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Código</mat-label>
+      <input matInput formControlName="codigo">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id">
+    </mat-form-field>
+
+    <div class="grid grid-cols-2 gap-3">
+      <button mat-raised-button color="accent" (click)="volver()" type="button">Volver</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!libroForm.valid">{{ nombreBoton() }}</button>
+    </div>
+  </div>
+
+</form>

@@ -1,1 +1,11 @@
-<p>pages works!</p>
+<div class="flex h-full">
+    <div class="w-1/5 z-20">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="w-4/5 h-full flex flex-col">
+        <app-header class="z-50"></app-header>
+        <div class="flex-grow overflow-auto z-0">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

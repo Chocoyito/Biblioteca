@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = ['autor', 'anoEdicion', 'genero', 'codigo', 'id', 'editar', 'visualizar'];
+
+  data: any[] = [
+    { autor: 'Gabriel García Márquez', anoEdicion: 1967, genero: 'Realismo mágico', codigo: 'GGM1001', id: 1 },
+    { autor: 'J.K. Rowling', anoEdicion: 1997, genero: 'Fantasía', codigo: 'JKR2001', id: 2 },
+    { autor: 'George Orwell', anoEdicion: 1949, genero: 'Distopía', codigo: 'GO3001', id: 3 },
+    { autor: 'Autor 20', anoEdicion: 2000, genero: 'Género 20', codigo: 'COD20', id: 20 }
+  ]; constructor() { }
 
   ngOnInit(): void {
   }
 
+  editarLibro(element: any) {
+
+  }
+
+  visualizarLibro(element: any) {
+
+  }
 }

@@ -5,10 +5,10 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
-    path: '', component: LoginComponent, data: { titulo: 'Inicio Sesión' }
+    path: 'login', component: LoginComponent, data: { titulo: 'Inicio Sesión' }
   },
   {
-    path: 'pages',
+    path: '',
     component: PagesComponent,
     loadChildren: () => import('src/app/pages/pages.module').then(m => m.PagesModule),
   },

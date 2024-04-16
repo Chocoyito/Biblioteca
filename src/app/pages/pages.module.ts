@@ -4,6 +4,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent }
@@ -12,12 +13,14 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    PagesComponent
+    PagesComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ],
   exports: [RouterModule]
 })

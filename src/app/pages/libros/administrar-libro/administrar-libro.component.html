@@ -26,10 +26,13 @@
       <input matInput formControlName="codigo">
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>ID</mat-label>
-      <input matInput formControlName="id">
-    </mat-form-field>
+    <ng-container *ngIf="rutaActual === 'visualizar'">
+      <mat-form-field appearance="outline">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id">
+      </mat-form-field>
+    </ng-container>
+    
 
     <div class="grid grid-cols-2 gap-3">
       <button mat-raised-button color="accent" (click)="volver()" type="button">Volver</button>

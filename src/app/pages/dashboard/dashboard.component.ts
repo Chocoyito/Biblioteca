@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LibrosService } from '../libros/libros.service';
+import { Libro } from 'src/app/types/libro.type';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,16 +10,14 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  displayedColumns: string[] = ['autor', 'anoEdicion', 'genero', 'codigo', 'id', 'editar', 'visualizar'];
+  displayedColumns: string[] = ['titulo', 'autor', 'anoEdicion', 'genero', 'codigo', 'editar', 'visualizar'];
 
-  data: any[] = [
-    { autor: 'Gabriel García Márquez', anoEdicion: 1967, genero: 'Realismo mágico', codigo: 'GGM1001', id: 1 },
-    { autor: 'J.K. Rowling', anoEdicion: 1997, genero: 'Fantasía', codigo: 'JKR2001', id: 2 },
-    { autor: 'George Orwell', anoEdicion: 1949, genero: 'Distopía', codigo: 'GO3001', id: 3 },
-    { autor: 'Autor 20', anoEdicion: 2000, genero: 'Género 20', codigo: 'COD20', id: 20 }
-  ]; constructor(private router: Router) { }
+  data: Libro[] = [];
+  
+  constructor(private router: Router, private librosService: LibrosService) { }
 
   ngOnInit(): void {
+    this.data = this.librosService.obtenerListaLibros();
   }
 
   editarLibro(element: any) {
@@ -25,6 +25,9 @@ export class DashboardComponent implements OnInit {
   }
 
   visualizarLibro(element: any) {
+    this.librosService.setLibroSeleccionado(element);
+    // console.log(element);
+    
     this.router.navigate(['libros/administrar/visualizar']);
   }
 }

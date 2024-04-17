@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LibrosService } from '../libros.service';
 import { Libro } from 'src/app/types/libro.type';
-import { AdministrarLibroService } from './administrar-libro.service';
 
 @Component({
   selector: 'app-administrar-libro',
@@ -18,11 +17,14 @@ export class AdministrarLibroComponent implements OnInit {
   libro: Libro = {} as Libro;
   libroSeleccionado: Libro = {} as Libro;
 
+  generos: string[] = [
+    'Suspenso', 'Romance', 'Accion', 'Ciencia ficcion', 'Terror'
+  ]
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private librosService: LibrosService,
-    private administrarLibroService: AdministrarLibroService
   ) { }
 
   ngOnInit(): void {
@@ -32,29 +34,25 @@ export class AdministrarLibroComponent implements OnInit {
     if(this.rutaActual === 'visualizar'){
       this.libroSeleccionado = this.librosService.getLibroSeleccionado()
 
-      console.log(this.libroSeleccionado);
+      // console.log(this.libroSeleccionado);
+      this.libroForm.get('id')?.setValue(this.libroSeleccionado.idLibro)
       this.libroForm.get('titulo')?.setValue(this.libroSeleccionado.titulo)
       this.libroForm.get('autor')?.setValue(this.libroSeleccionado.autor)
-      this.libroForm.get('anoEdicion')?.setValue(this.libroSeleccionado.anoEdicion)
+      this.libroForm.get('anoEdicion')?.setValue(this.libroSeleccionado.anioEdicion)
       this.libroForm.get('genero')?.setValue(this.libroSeleccionado.genero)
       this.libroForm.get('codigo')?.setValue(this.libroSeleccionado.codigo)
-      this.libroForm.get('id')?.setValue(this.libroSeleccionado.id)
       
       this.libroForm.disable()
     }
-  }
-
-  nombreBoton(){
-    return this.rutaActual === 'agregar' ? 'Agregar Libro' : 'Editar libro'
-  
-  }
-
-  obtenerRuta() {
-    // Obtén la última parte de lal ruta
-    let rutaCompleta = this.router.url;
-    let segmentosDeRuta = rutaCompleta.split('/');
-    this.rutaActual = segmentosDeRuta.pop();
-    console.log(this.rutaActual);
+    else if (this.rutaActual === 'editar') {
+      this.libroSeleccionado = this.librosService.getLibroSeleccionado()
+      this.libroForm.get('id')?.setValue(this.libroSeleccionado.idLibro)
+      this.libroForm.get('titulo')?.setValue(this.libroSeleccionado.titulo)
+      this.libroForm.get('autor')?.setValue(this.libroSeleccionado.autor)
+      this.libroForm.get('anoEdicion')?.setValue(this.libroSeleccionado.anioEdicion)
+      this.libroForm.get('genero')?.setValue(this.libroSeleccionado.genero)
+      this.libroForm.get('codigo')?.setValue(this.libroSeleccionado.codigo)
+    }
   }
 
   initReactiveForm() {
@@ -68,23 +66,61 @@ export class AdministrarLibroComponent implements OnInit {
     })
   }
 
+  nombreBoton(){
+    return this.rutaActual === 'agregar' ? 'Agregar Libro' : 'Editar libro'
+  }
+
+  obtenerRuta() {
+    // Obtén la última parte de lal ruta
+    let rutaCompleta = this.router.url;
+    let segmentosDeRuta = rutaCompleta.split('/');
+    this.rutaActual = segmentosDeRuta.pop();
+    console.log(this.rutaActual);
+  }
+
+  procesarDatos(){
+    return new Promise<any>(resolve => {
+      this.libro = {
+        titulo: this.libroForm.get('titulo')?.value,
+        autor: this.libroForm.get('autor')?.value,
+        anioEdicion: this.libroForm.get('anoEdicion')?.value,
+        genero: this.libroForm.get('genero')?.value,
+        codigo: this.libroForm.get('codigo')?.value,        
+      }
+      this.librosService.guardarLibros(this.libro).then(result => {
+        this.router.navigate(['dashboard'])
+        resolve(result)
+      })
+    })
+  }
+
+  editarLibro(){
+    return new Promise<any>(resolve => {
+      this.libro = {
+        titulo: this.libroForm.get('titulo')?.value,
+        autor: this.libroForm.get('autor')?.value,
+        anioEdicion: this.libroForm.get('anoEdicion')?.value,
+        genero: this.libroForm.get('genero')?.value,
+        codigo: this.libroForm.get('codigo')?.value,
+        idLibro: this.libroForm.get('id')?.value        
+      }
+      this.librosService.editarLibro(this.libro).then(result => {
+        this.router.navigate(['dashboard'])
+        resolve(result)
+      })
+    })
+  }
+
+
   onSubmit() {
 
     switch (this.rutaActual) {
       case 'agregar':
-        this.libro = {
-          titulo: this.libroForm.get('titulo')?.value,
-          autor: this.libroForm.get('autor')?.value,
-          anoEdicion: this.libroForm.get('anoEdicion')?.value,
-          genero: this.libroForm.get('genero')?.value,
-          codigo: this.libroForm.get('codigo')?.value,        
-        }
-        this.administrarLibroService.guardarLibro(this.libro)
-        this.router.navigate(['dashboard'])
-      break;
+        this.procesarDatos()
+       break;
       case 'editar':
-        // Código para editar un libro
-        break;
+        this.editarLibro()
+      break;
       default:
         break;
     }

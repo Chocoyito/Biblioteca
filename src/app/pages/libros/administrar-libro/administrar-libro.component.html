@@ -1,5 +1,5 @@
 <form [formGroup]="libroForm" (ngSubmit)="onSubmit()">
-  <div class="flex flex-col justify-center px-8">
+  <div class="flex flex-col justify-center px-8 py-3">
 
     <mat-form-field appearance="outline">
       <mat-label>Titulo</mat-label>
@@ -17,14 +17,18 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Género</mat-label>
-      <input matInput formControlName="genero">
+      <mat-label>Generos</mat-label>
+      <mat-select formControlName="genero">
+        <mat-option *ngFor="let genero of generos" [value]="genero">{{ genero }}</mat-option>
+      </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Código</mat-label>
-      <input matInput formControlName="codigo">
-    </mat-form-field>
+    <ng-container *ngIf="rutaActual === 'visualizar'">
+      <mat-form-field appearance="outline">
+        <mat-label>Código</mat-label>
+        <input matInput formControlName="codigo">
+      </mat-form-field>
+    </ng-container>
 
     <ng-container *ngIf="rutaActual === 'visualizar'">
       <mat-form-field appearance="outline">

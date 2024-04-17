@@ -1,8 +1,12 @@
 export type Libro = { 
+    idLibro?: number;
     titulo: string;
     autor: string;
-    anoEdicion: number;
+    anioEdicion: number;
     genero: string;
-    codigo: string;
-    id?: number;
+    codigo?: string;
+}
+
+export type LibroBD = {
+
 }

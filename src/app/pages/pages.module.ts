@@ -9,7 +9,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
-
   {
     path: 'libros',
     loadChildren: () => import('src/app/pages/libros/libros.module').then(m => m.LibrosModule),

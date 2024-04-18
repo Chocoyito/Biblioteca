@@ -77,6 +77,18 @@ export class LibrosService {
     }
   }
 
+  async eliminarLibro(libro: Libro): Promise<any> {
+    try {
+      const response = await firstValueFrom(
+        this.librosEndpointService.eliminarLibro(libro)
+      );
+
+      return response;
+    } catch (error) {
+      return error.error;
+    }
+  }
+
   // obtenerListaLibros(): Observable<any>{
   //   return this.http.get(this.url) 
   // }

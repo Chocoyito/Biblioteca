@@ -12,7 +12,7 @@ export class LibrosEndpointService {
     private http: HttpClient
   ) { }
 
-  urlErick: string = 'http://192.168.106.1:8080/book/';
+  urlErick: string = 'http://192.168.137.158:8080/book/';
 
 
   verLibros() : Observable<any>{
@@ -23,13 +23,12 @@ export class LibrosEndpointService {
     return this.http.post(`${this.urlErick}add`, obj)
   }
 
-  editarLibro(obj: Libro) : Observable<any>{
-    let objLibro = {
-      // titulo: obj.titulo,
-    }
-    console.log(obj);
-    
+  editarLibro(obj: Libro) : Observable<any>{  
     return this.http.put(`${this.urlErick}edit/${obj.idLibro}`, obj)
+  }
+
+  eliminarLibro(obj: Libro) : Observable<any>{
+    return this.http.put(`${this.urlErick}delete/${obj.idLibro}`, obj)
   }
 
 }

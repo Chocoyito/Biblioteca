@@ -67,7 +67,7 @@ export class AdministrarLibroComponent implements OnInit {
   }
 
   nombreBoton(){
-    return this.rutaActual === 'agregar' ? 'Agregar Libro' : 'Editar libro'
+    return this.rutaActual === 'agregar' ? 'Agregar Libro' : this.rutaActual === 'visualizar' ? 'Eliminar libro' : 'Editar libro'
   }
 
   obtenerRuta() {
@@ -94,7 +94,7 @@ export class AdministrarLibroComponent implements OnInit {
     })
   }
 
-  editarLibro(){
+  rellenarLibro(){
     return new Promise<any>(resolve => {
       this.libro = {
         titulo: this.libroForm.get('titulo')?.value,
@@ -104,10 +104,19 @@ export class AdministrarLibroComponent implements OnInit {
         codigo: this.libroForm.get('codigo')?.value,
         idLibro: this.libroForm.get('id')?.value        
       }
-      this.librosService.editarLibro(this.libro).then(result => {
-        this.router.navigate(['dashboard'])
-        resolve(result)
-      })
+      if (this.rutaActual === 'visualizar'){
+        this.librosService.eliminarLibro(this.libroSeleccionado).then(result => {
+          this.router.navigate(['dashboard'])
+
+          resolve(result)
+        })
+      } else{
+        this.librosService.editarLibro(this.libro).then(result => {
+          this.router.navigate(['dashboard'])
+          resolve(result)
+        })
+      }
+     
     })
   }
 
@@ -119,8 +128,11 @@ export class AdministrarLibroComponent implements OnInit {
         this.procesarDatos()
        break;
       case 'editar':
-        this.editarLibro()
+        this.rellenarLibro()
       break;
+      case 'visualizar':
+        this.rellenarLibro()
+        break;
       default:
         break;
     }

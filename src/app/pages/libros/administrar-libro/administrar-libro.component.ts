@@ -67,7 +67,7 @@ export class AdministrarLibroComponent implements OnInit {
   }
 
   nombreBoton(){
-    return this.rutaActual === 'agregar' ? 'Agregar Libro' : this.rutaActual === 'visualizar' ? 'Eliminar libro' : 'Editar libro'
+    return this.rutaActual === 'agregar' ? 'Agregar Libro' : this.rutaActual === 'visualizar' ? 'Dar de baja' : 'Editar libro'
   }
 
   obtenerRuta() {
@@ -116,13 +116,10 @@ export class AdministrarLibroComponent implements OnInit {
           resolve(result)
         })
       }
-     
     })
   }
 
-
   onSubmit() {
-
     switch (this.rutaActual) {
       case 'agregar':
         this.procesarDatos()
@@ -132,14 +129,11 @@ export class AdministrarLibroComponent implements OnInit {
       break;
       case 'visualizar':
         this.rellenarLibro()
-        break;
-      default:
-        break;
+      break;
     }
   }
 
   volver() {
     this.router.navigate(['dashboard'])
   }
-
 }

@@ -14,7 +14,10 @@ export class DashboardComponent implements OnInit {
 
   data: any;
 
-  constructor(private router: Router, private librosService: LibrosService) { }
+  constructor(
+    private router: Router, 
+    private librosService: LibrosService
+  ) { }
 
   ngOnInit(): void {
     this.data = this.librosService.verLibros().subscribe(data => {

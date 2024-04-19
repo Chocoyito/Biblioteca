@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AdministrarLibroComponent } from './administrar-libro/administrar-libro.component';
+import { BusquedaLibrosComponent } from './busqueda-libros/busqueda-libros.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,9 @@ const routes: Routes = [
           { path: 'visualizar', component: AdministrarLibroComponent },
         ]
       },  
+      {
+        path: 'busqueda', component: BusquedaLibrosComponent
+      },
       { path: '**', redirectTo: 'dashboard' }
     ]
   }

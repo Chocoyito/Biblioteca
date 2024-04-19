@@ -17,13 +17,9 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router, private librosService: LibrosService) { }
 
   ngOnInit(): void {
-    // this.data = this.librosService.obtenerListaLibros();
     this.data = this.librosService.verLibros().subscribe(data => {
-      console.log(data);
       this.data = data
-
-    }
-    )
+    })
   }
 
   editarLibro(element: any) {
@@ -33,8 +29,6 @@ export class DashboardComponent implements OnInit {
 
   visualizarLibro(element: any) {
     this.librosService.setLibroSeleccionado(element);
-    // console.log(element);
-
     this.router.navigate(['libros/administrar/visualizar']);
   }
 }

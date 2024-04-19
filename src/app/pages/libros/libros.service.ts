@@ -11,25 +11,15 @@ export class LibrosService {
 
   libro: any
 
-  data: Libro[] = [
-    // { titulo: 'Cien años de soledad', autor: 'Gabriel García Márquez', anoEdicion: 1967, genero: 'Realismo mágico', codigo: 'GGM1001', id: 1 },
-    // { titulo: '1984', autor: 'George Orwell', anoEdicion: 1949, genero: 'Distopía', codigo: 'GO3001', id: 2 },
-    // { titulo: 'Don Quijote de la Mancha', autor: 'Miguel de Cervantes', anoEdicion: 1605, genero: 'Novela', codigo: 'MC4001', id: 3 },
-  ]; 
-
-  obtenerListaLibros(){
-    return this.data
-  }
-
-  // guardarLibro(objeto: Libro){
-  //   let id: number = this.data.length + 1
-  //   objeto.idLibro = id
-  //   this.data.push(objeto)
-  // }
+  data: Libro[] = []; 
 
   constructor(
     private librosEndpointService: LibrosEndpointService
   ) { }
+
+  obtenerListaLibros(){
+    return this.data
+  }
 
   setLibroSeleccionado(objeto: any){
     this.libro = objeto
@@ -41,8 +31,6 @@ export class LibrosService {
 
 
   url: string = 'http://localhost:3000/libros';
-
-
 
   
   verLibros(): Observable<any>{

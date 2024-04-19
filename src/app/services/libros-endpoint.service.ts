@@ -12,7 +12,7 @@ export class LibrosEndpointService {
     private http: HttpClient
   ) { }
 
-  urlErick: string = 'http://192.168.137.158:8080/book/';
+  urlErick: string = 'http://192.168.1.78:8080/book/';
 
 
   verLibros() : Observable<any>{

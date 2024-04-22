@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
+import { Persona } from './types/persona.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
 
-  invitado: boolean
 
   constructor() { }
 
-  setInvitado(bool:  boolean){
-    this.invitado = bool
+  private _invitado: boolean;
+  get invitado(): boolean {
+    return this._invitado;
+  }
+  set invitado(value: boolean) {
+    this._invitado = value;
   }
 
-  getInvitado(){
-    return this.invitado
+  private _persona: Persona;
+  get persona(): Persona {
+    return this._persona;
+  }
+  set persona(value: Persona) {
+    this._persona = value;
   }
 }

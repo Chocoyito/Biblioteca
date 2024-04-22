@@ -4,45 +4,31 @@
     <div class="flex flex-col items-center h-max text-center gap-16">
       <div class="flex flex-col items-center gap-2">
         <img src="../../../../assets/img/user-avatar-happy-icon-2048x2048-ssmbv1ou.png" alt="">
-        <label for="">Papu</label>
+        <label *ngIf="appService.invitado == false">Papu</label>
+        <label *ngIf="appService.invitado == true">{{ obtenerNombrePersona() }}</label>
       </div>
       <div class="flex flex-col gap-4 text-center">
 
-        <div>
+        <div *ngIf="appService.invitado == false">
           <a class="link" (click)="onClickNavigate('/libros/administrar/agregar')">
             Agregar libro
           </a>
         </div>
-       
-        <!-- <div>
-          <a class="link" (click)="onClickNavigate('/libros/busqueda')">
-            Buscar libros
-          </a>
-        </div> -->
-
         <div>
           <a class="link">
             Prestamos y devoluciones
           </a>
         </div>
-
         <div>
           <a class="link">
             Multas
           </a>
         </div>
-
-        <!-- <div>
-          <a class="link">
-            Inventario
-          </a>
-        </div> -->
       </div>
 
       <div>
         <a href="" class="logout" (click)="onClickNavigate('login')">
           Cerrar sesión 
-
         </a>
       </div>
     </div>

@@ -101,18 +101,15 @@
                         </td>
                     </ng-container>
 
-                    <ng-container *ngIf="appService.getInvitado() == false">
+                    <ng-container *ngIf="appService.invitado == false">
                         <tr mat-header-row class="tw-sticky tw-top-0" *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </ng-container>
 
-                    <ng-container *ngIf="appService.getInvitado() == true">
+                    <ng-container *ngIf="appService.invitado == true">
                         <tr mat-header-row class="tw-sticky tw-top-0" *matHeaderRowDef="displayedColumnsInvitado"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumnsInvitado;"></tr>
                     </ng-container>
-
-
-                   
                 </table>
             </ng-container>
         </div>

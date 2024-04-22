@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
+import { Persona } from '../types/persona.type';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   invitado: boolean;
+  persona: Persona = {} as Persona;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.initReactiveForm()
     this.invitado = false
-    this.appService.setInvitado(false)
+    this.appService.invitado = false
   }
 
   initReactiveForm() {
@@ -41,20 +43,25 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['dashboard'])
     }
     else if(this.invitado){
+      this.persona = {
+        nombres:this.loginForm.get('nombres')?.value,
+        apellidos:this.loginForm.get('apellidos')?.value,
+        cedula:this.loginForm.get('cedula')?.value
+      }
+      this.appService.persona = this.persona 
+
       this.router.navigate(['dashboard'])
-    
     }
   }
 
   
   iniciarInvitado(){
     this.invitado = true
-    this.appService.setInvitado(true)
+    this.appService.invitado = true
   }
-
 
   iniciarAdministrador(){
     this.invitado = false
-    this.appService.setInvitado(false)
+    this.appService.invitado = false
   }
 }

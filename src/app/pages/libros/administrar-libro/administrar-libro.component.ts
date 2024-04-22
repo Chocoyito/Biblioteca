@@ -18,7 +18,7 @@ export class AdministrarLibroComponent implements OnInit {
   libroSeleccionado: Libro = {} as Libro;
 
   generos: string[] = [
-    'Suspenso', 'Romance', 'Accion', 'Ciencia ficcion', 'Terror'
+    'Suspenso', 'Romance', 'Accion', 'Ciencia ficcion', 'Terror', 'Ficción'
   ]
 
   constructor(

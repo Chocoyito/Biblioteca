@@ -4,14 +4,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material/material.module';
 import { AdministrarLibroComponent } from './administrar-libro/administrar-libro.component';
 import { LibrosRoutingModuleModule } from './libros-routing-module.module';
-import { BusquedaLibrosComponent } from './busqueda-libros/busqueda-libros.component';
+import { PrestamoLibroComponent } from './prestamo-libro/prestamo-libro.component';
 
 
 
 @NgModule({
   declarations: [
     AdministrarLibroComponent,
-    BusquedaLibrosComponent
+    PrestamoLibroComponent
   ],
   imports: [
     CommonModule,

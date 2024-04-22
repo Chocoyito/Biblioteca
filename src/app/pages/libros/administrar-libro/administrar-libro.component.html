@@ -30,17 +30,17 @@
       </mat-form-field>
     </ng-container>
 
-    <ng-container *ngIf="rutaActual === 'visualizar'">
+    <!-- <ng-container *ngIf="rutaActual === 'visualizar'">
       <mat-form-field appearance="outline">
         <mat-label>ID</mat-label>
         <input matInput formControlName="id">
       </mat-form-field>
-    </ng-container>
+    </ng-container> -->
     
 
     <div class="grid grid-cols-2 gap-3">
       <button mat-raised-button color="accent" (click)="volver()" type="button">Volver</button>
-      <button *ngIf="this.rutaActual === 'editar'" mat-raised-button color="primary" type="submit" [disabled]="!libroForm.valid">{{ nombreBoton() }}</button>
+      <!-- <button *ngIf="this.rutaActual === 'editar'" mat-raised-button color="primary" type="submit" [disabled]="!libroForm.valid">{{ nombreBoton() }}</button> -->
       <button mat-raised-button color="primary" type="submit">{{ nombreBoton() }}</button>
     </div>
   </div>

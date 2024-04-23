@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LibrosService } from '../libros.service';
 import { Libro } from 'src/app/types/libro.type';
@@ -13,6 +13,8 @@ export class AdministrarLibroComponent implements OnInit {
 
   libroForm: FormGroup;
   rutaActual: any;
+
+  regexSoloNumeros = '^[0-9]*$';
 
   libro: Libro = {} as Libro;
   libroSeleccionado: Libro = {} as Libro;
@@ -57,10 +59,10 @@ export class AdministrarLibroComponent implements OnInit {
 
   initReactiveForm() {
     this.libroForm = this.formBuilder.group({
-      titulo: [''],
-      autor: [''],
-      anoEdicion: [''],
-      genero: [''],
+      titulo: ['', Validators.required],
+      autor: ['', Validators.required],
+      anoEdicion: ['', Validators.required],
+      genero: ['', Validators.required],
       codigo: [''],
       id: ['']
     })

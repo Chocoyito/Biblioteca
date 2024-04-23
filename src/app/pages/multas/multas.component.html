@@ -1,0 +1,85 @@
+<div class="flex justify-center">
+    <form [formGroup]="busquedaFormGroup" class="w-full">
+        <div class="grid gap-5">
+            <div class="grid grid-cols-2 tw-rounded-lg mat-elevation-z1 p-3 gap-3z">
+                <ng-container *ngIf="tipoBusqueda.value === 'Nombre'">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="nombre">
+                    </mat-form-field>
+                </ng-container>
+
+                <ng-container *ngIf="tipoBusqueda.value === 'Apellido'">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput formControlName="apellido">
+                    </mat-form-field>
+                </ng-container>
+
+                <ng-container *ngIf="tipoBusqueda.value === 'Libro'">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Libro</mat-label>
+                        <input matInput formControlName="libro">
+                    </mat-form-field>
+                </ng-container>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Tipo de busqueda</mat-label>
+                    <mat-select formControlName="tipoBusqueda" #tipoBusqueda>
+                        <mat-option *ngFor="let busqueda of busquedas" [value]="busqueda">
+                            {{ busqueda }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <ng-container #tabla>
+                <table mat-table [dataSource]="data">
+                    <div>
+                        <h5 class="tw-text-lg tw-py-4">Búsqueda de multas</h5>
+                    </div>
+
+                    <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="apellido">
+                        <th mat-header-cell *matHeaderCellDef> Apellido </th>
+                        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cedula">
+                        <th mat-header-cell *matHeaderCellDef> Cedula </th>
+                        <td mat-cell *matCellDef="let element"> {{element.cedula}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="monto">
+                        <th mat-header-cell *matHeaderCellDef> Monto </th>
+                        <td mat-cell *matCellDef="let element"> {{element.monto}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="codigo">
+                        <th mat-header-cell *matHeaderCellDef> Cod Libro </th>
+                        <td mat-cell *matCellDef="let element"> {{element.codigo}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="titulo">
+                        <th mat-header-cell *matHeaderCellDef> Libro </th>
+                        <td mat-cell *matCellDef="let element"> {{element.titulo}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cancelar">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-button (click)="removerMulta(element)">Cancelar</button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row class="tw-sticky tw-top-0" *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </ng-container>
+        </div>
+    </form>
+</div>

@@ -4,11 +4,13 @@ import { MaterialModule } from '../material/material.module';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './components/siderbar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,

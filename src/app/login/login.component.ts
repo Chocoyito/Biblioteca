@@ -6,6 +6,7 @@ import { Persona } from '../types/persona.type';
 import { Usuario } from '../types/usuario.type';
 import { EndpointService } from '../services/endpoint.service';
 import { firstValueFrom } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private appService: AppService,
-    private endpointService: EndpointService
+    private endpointService: EndpointService,
+    private matSnackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -72,8 +74,11 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     if(this.invitado){
       if(this.loginForm.get('nombres')?.value == '' || this.loginForm.get('apellidos')?.value == '' || this.loginForm.get('cedula')?.value == ''){
-        alert('Por favor llene todos los campos')
+        this.matSnackBar.open('Por favor, complete todos los campos', 'Cerrar', {
+          duration: 2000
+        })
       }
+
       this.router.navigate(['dashboard'])
       return
     }
@@ -82,7 +87,10 @@ export class LoginComponent implements OnInit {
       if(result){
         this.router.navigate(['dashboard'])
       } else {
-        alert('Usuario o contraseña incorrectos')
+        this.loginForm.get('contrasena').setValue('')
+        this.matSnackBar.open('Usuario o contraseña incorrectos', 'Cerrar', {
+          duration: 2000
+        })
       }
     })
   }

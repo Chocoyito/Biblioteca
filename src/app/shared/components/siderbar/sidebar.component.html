@@ -8,43 +8,43 @@
         <label *ngIf="invitado">{{ obtenerNombrePersona() }}</label>
       </div>
       <div *ngIf="!invitado" class="flex flex-col gap-4 text-center">
-        <div>
-          <a class="link" (click)="listarLibros(false)">
+        <div class="enlace" (click)="listarLibros(false)">
+          <a class="link">
             Libros
           </a>
         </div>
-        <div>
-          <a class="link" (click)="onClickNavigate('/libros/administrar/agregar')">
+        <div class="enlace" (click)="onClickNavigate('/libros/administrar/agregar')">
+          <a class="link">
             Agregar Libro
           </a>
         </div>
-        <div>
-          <a class="link" (click)="onClickNavigate('/prestamosDevoluciones')">
-            Prestamos & Devoluciones
+        <div class="enlace" (click)="onClickNavigate('/prestamosDevoluciones')">
+          <a class="link">
+            Prestamos y Devoluciones
           </a>
         </div>
-        <div>
-          <a class="link" (click)="onClickNavigate('/multas')">
+        <div class="enlace" (click)="onClickNavigate('/multas')">
+          <a class="link">
             Multas
           </a>
         </div>
       </div>
 
       <div *ngIf="invitado" class="flex flex-col gap-4 text-center">
-        <div>
-          <a class="link" (click)="listarLibros(false)">
+        <div class="enlace" (click)="listarLibros(false)">
+          <a class="link">
             Libros
           </a>
         </div>
-        <div>
-          <a class="link" (click)="listarLibros(true)">
+        <div class="enlace" (click)="listarLibros(true)">
+          <a class="link">
             Libros en Posesión
           </a>
         </div>
       </div>
 
-      <div>
-        <a href="" class="logout" (click)="cerrarSesion()">
+      <div (click)="cerrarSesion()">
+        <a href="" class="logout enlace">
           Cerrar sesión 
         </a>
       </div>

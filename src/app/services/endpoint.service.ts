@@ -16,13 +16,13 @@ export class EndpointService {
     private http: HttpClient
   ) { }
 
-  urlLibro: string = 'http://localhost:8080/book/';
-  urlUsuario: string = 'http://localhost:8080/';
+  urlLibro: string = 'http://192.168.1.78:8080/book/';
+  urlUsuario: string = 'http://192.168.1.78:8080/';
 
 
-  urlMulta: string = 'http://localhost:8080/latefee/';
+  urlMulta: string = 'http://192.168.1.78:8080/latefee/';
 
-  urlPersona: string = 'http://localhost:8080/person/';
+  urlPersona: string = 'http://192.168.1.78:8080/person/';
 
 
   verLibros() : Observable<any>{
@@ -39,6 +39,10 @@ export class EndpointService {
 
   eliminarLibro(obj: Libro) : Observable<any>{
     return this.http.put(`${this.urlLibro}delete/${obj.idLibro}`, obj)
+  }
+
+  verPredev() : Observable<any>{
+    return this.http.get(`${this.urlLibro}listPreDev`)
   }
 
   iniciarSesion(obj: Usuario) : Observable<any>{
@@ -65,8 +69,6 @@ export class EndpointService {
     return this.http.put(`${this.urlMulta}pay/${obj.idMulta}`, obj)
   }
 
-  verPredev() : Observable<any>{
-    return this.http.get(`${this.urlLibro}listPreDev`)
-  }
+  
 
 }

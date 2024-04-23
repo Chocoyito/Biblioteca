@@ -80,8 +80,8 @@ export class LoginComponent implements OnInit {
       }
       this.iniciarInvitado()
       this.appService.persona = {
-        nombres: this.loginForm.get('nombres')?.value,
-        apellidos: this.loginForm.get('apellidos')?.value,
+        nombre: this.loginForm.get('nombres')?.value,
+        apellido: this.loginForm.get('apellidos')?.value,
         cedula: this.loginForm.get('cedula')?.value
       }
       this.router.navigate(['dashboard'])

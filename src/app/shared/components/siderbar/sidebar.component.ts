@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit {
   }
 
   obtenerNombrePersona(){
-    return this.persona.nombres + ' ' + this.persona.apellidos;
+    return this.persona.nombre + ' ' + this.persona.apellido;
   }
 
   onClickNavigate(url: string) {

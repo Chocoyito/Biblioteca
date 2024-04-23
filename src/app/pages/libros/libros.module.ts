@@ -7,7 +7,6 @@ import { LibrosRoutingModuleModule } from './libros-routing-module.module';
 import { PrestamoLibroComponent } from './prestamo-libro/prestamo-libro.component';
 
 
-
 @NgModule({
   declarations: [
     AdministrarLibroComponent,

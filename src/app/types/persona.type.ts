@@ -1,5 +1,6 @@
 export type Persona = {
-    nombres: string,
-    apellidos: string,
+    nombre: string,
+    apellido: string,
     cedula: string,
 }
+

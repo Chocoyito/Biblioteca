@@ -6,7 +6,3 @@ export type Libro = {
     genero: string;
     codigo?: string;
 }
-
-export type LibroBD = {
-
-}

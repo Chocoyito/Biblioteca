@@ -149,6 +149,10 @@ export class DashboardComponent implements OnInit {
           this.snackBar.open('Libro devuelto con éxito', 'Cerrar', {
             duration: 2000
           });
+          this.data = this.librosService.verLibrosPorDevolver(this.persona.cedula).subscribe(data => {
+            this.data = data
+            this.originalData = [...data];
+          })
         })
       }
     })

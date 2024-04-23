@@ -47,7 +47,8 @@
     <div class="grid grid-cols-2 gap-3">
       <button mat-raised-button color="accent" (click)="volver()" type="button">Volver</button>
       <!-- <button *ngIf="this.rutaActual === 'editar'" mat-raised-button color="primary" type="submit" [disabled]="!libroForm.valid">{{ nombreBoton() }}</button> -->
-      <button mat-raised-button color="primary" type="submit" [disabled]="this.libroForm.invalid">{{ nombreBoton() }}</button>
+      <button *ngIf="!invitado" mat-raised-button color="primary" type="submit" [disabled]="this.libroForm.invalid">{{ nombreBoton() }}</button>
+      
     </div>
   </div>
 

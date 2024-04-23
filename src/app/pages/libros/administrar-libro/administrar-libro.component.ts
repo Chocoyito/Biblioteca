@@ -19,9 +19,11 @@ export class AdministrarLibroComponent implements OnInit {
 
   libro: Libro = {} as Libro;
   libroSeleccionado: Libro = {} as Libro;
+  invitado: boolean;
+
 
   generos: string[] = [
-    'Suspenso', 'Romance', 'Accion', 'Ciencia ficcion', 'Terror', 'Ficción'
+    'Suspenso', 'Romance', 'Acción', 'Terror', 'Ficción', 'Distopía', 'Novela', 'Fantasía', 'Misterio'  
   ]
 
   constructor(
@@ -34,6 +36,8 @@ export class AdministrarLibroComponent implements OnInit {
   ngOnInit(): void {
     this.initReactiveForm()
     this.obtenerRuta()
+    this.invitado = this.appService.invitado;
+
 
     if(this.rutaActual === 'visualizar'){
       this.appService.setTitulo('Visualizar Libro')

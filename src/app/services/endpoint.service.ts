@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Libro } from '../types/libro.type';
 import { Usuario } from '../types/usuario.type';
+import { Persona } from '../types/persona.type';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class EndpointService {
 
   urlLibro: string = 'http://localhost:8080/book/';
   urlUsuario: string = 'http://localhost:8080/';
+  urlPersona: string = 'http://localhost:8080/person/';
 
 
   verLibros() : Observable<any>{
@@ -36,5 +38,11 @@ export class EndpointService {
   iniciarSesion(obj: Usuario) : Observable<any>{
      return this.http.get(`${this.urlUsuario}login?user=${obj.usuario}&password=${obj.contrasena}`)
   }
+  
+  registrarPrestamo( persona: Persona, obj: Libro,) : Observable<any>{
+    return this.http.post(`${this.urlPersona}${obj.codigo}/BorrowBook`,persona)
+  }
+
+  
 
 }

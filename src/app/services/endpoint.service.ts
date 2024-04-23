@@ -17,6 +17,7 @@ export class EndpointService {
   urlLibro: string = 'http://localhost:8080/book/';
   urlUsuario: string = 'http://localhost:8080/';
   urlMulta: string = 'http://localhost:8080/latefee/';
+  urlPersona: string = 'http://localhost:8080/person/';
 
 
   verLibros() : Observable<any>{
@@ -37,6 +38,14 @@ export class EndpointService {
 
   iniciarSesion(obj: Usuario) : Observable<any>{
      return this.http.get(`${this.urlUsuario}login?user=${obj.usuario}&password=${obj.contrasena}`)
+  }
+
+  verLibrosPorDevolver(cedula: string) : Observable<any>{
+    return this.http.get(`${this.urlPersona}${cedula}/listBorrowed`)
+  }
+
+  devolverLibro(obj: Libro) : Observable<any>{
+    return this.http.put(`${this.urlPersona}${obj.idLibro}/returnBook`, obj)
   }
 
   verMultas() : Observable<any>{

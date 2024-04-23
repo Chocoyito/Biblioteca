@@ -78,13 +78,20 @@ export class LoginComponent implements OnInit {
           duration: 2000
         })
       }
-
+      this.iniciarInvitado()
+      this.appService.persona = {
+        nombres: this.loginForm.get('nombres')?.value,
+        apellidos: this.loginForm.get('apellidos')?.value,
+        cedula: this.loginForm.get('cedula')?.value
+      }
       this.router.navigate(['dashboard'])
       return
     }
 
     this.procesarDatos().then(result => {
       if(result){
+        this.iniciarAdministrador()
+        this.appService.usuario = this.loginForm.get('usuario')?.value
         this.router.navigate(['dashboard'])
       } else {
         this.loginForm.get('contrasena').setValue('')

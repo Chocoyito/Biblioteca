@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { firstValueFrom } from 'rxjs';
+import { AppService } from 'src/app/app.service';
 import { EndpointService } from 'src/app/services/endpoint.service';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { Multa } from 'src/app/types/multa.type';
@@ -27,11 +28,12 @@ export class MultasComponent implements OnInit {
     private endpointService: EndpointService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private appService: AppService
   ) { }
 
   ngOnInit(): void {
-
+    this.appService.setTitulo('Multas');
     this.data = this.endpointService.verMultas().subscribe(data => {
       this.data = data
       this.originalData = [...data];
@@ -41,6 +43,7 @@ export class MultasComponent implements OnInit {
   }
 
   initReactiveForm() {
+    
     this.busquedaFormGroup = this.formBuilder.group({
       nombre: [''],
       apellido: [''],

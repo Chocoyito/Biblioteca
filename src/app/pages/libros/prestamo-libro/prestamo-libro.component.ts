@@ -17,6 +17,8 @@ export class PrestamoLibroComponent implements OnInit {
   prestamoForm: FormGroup
   libro: Libro = {} as Libro;
   libroSeleccionado: Libro = {} as Libro;
+  persona: Persona = {} as Persona;
+
   rutaActual: any;
 
   constructor(
@@ -29,9 +31,11 @@ export class PrestamoLibroComponent implements OnInit {
 
   ngOnInit(): void {
     this.initReactiveForm()
-
     this.libroSeleccionado = this.librosService.getLibroSeleccionado()
-
+    //Inicializar persona con los datos de localstorage
+    const personaJSON = localStorage.getItem('persona');
+      this.persona = localStorage.getItem('persona') ? JSON.parse(personaJSON) : {} as Persona;
+      console.log(this.persona);
     console.log(this.libroSeleccionado);
 
 
@@ -69,6 +73,11 @@ export class PrestamoLibroComponent implements OnInit {
     });
   }
 
+
+  obtenerNombrePersona(){
+    return this.persona.nombre + ' ' + this.persona.apellido+ ' ' + this.persona.cedula;
+  }
+  
   mostrarSnackBar(mensaje: string): void {
     const snackBarRef = this.snackBar.open(mensaje, 'Cerrar', {
       duration: 3000, // Duración del Snackbar en milisegundos

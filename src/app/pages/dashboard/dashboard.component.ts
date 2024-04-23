@@ -153,4 +153,8 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
+
+  volver() {
+    this.router.navigate(['dashboard'])
+  }
 }

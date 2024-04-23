@@ -8,6 +8,7 @@ import { Persona } from 'src/app/types/persona.type';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,6 +38,8 @@ export class DashboardComponent implements OnInit {
   busquedaFormGroup: FormGroup
   valorBusqueda: string
   enPosesion: boolean
+
+  showSpinner: boolean = true
 
   constructor(
     private router: Router, 

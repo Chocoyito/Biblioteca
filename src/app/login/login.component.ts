@@ -53,10 +53,25 @@ export class LoginComponent implements OnInit {
       }
       
         this.iniciarSesion(this.usuario).then(result => {
+          console.log('entrar al inciar session:');
+          this.guardarDatosPersona()
           console.log(result)
           resolve(result)
         })
     })
+  }
+
+  guardarDatosPersona(){
+        console.log('entrar a guardar datos:');
+
+    const persona: Persona = {
+      nombre: this.loginForm.get('nombres')?.value,
+      apellido: this.loginForm.get('apellidos')?.value,
+      cedula: this.loginForm.get('cedula')?.value
+    };
+    console.log('Persona:', persona);
+    localStorage.setItem('persona', JSON.stringify(persona));
+
   }
 
   async iniciarSesion(usuario: Usuario): Promise<any> {
@@ -106,6 +121,8 @@ export class LoginComponent implements OnInit {
   iniciarInvitado(){
     this.invitado = true
     this.appService.invitado = true
+    this.guardarDatosPersona()
+
   }
 
   iniciarAdministrador(){

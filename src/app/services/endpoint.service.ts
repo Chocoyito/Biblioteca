@@ -56,7 +56,7 @@ export class EndpointService {
   }
 
   devolverLibro(obj: Libro) : Observable<any>{
-    return this.http.put(`${this.urlPersona}${obj.idLibro}/returnBook`, obj)
+    return this.http.post(`${this.urlPersona}${obj.idLibro}/returnBook`, obj)
   }
 
   verMultas() : Observable<any>{

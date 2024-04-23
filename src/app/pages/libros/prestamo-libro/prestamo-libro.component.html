@@ -1,27 +1,6 @@
 <form [formGroup]="prestamoForm" (ngSubmit)="onSubmit()">
     <div class="flex flex-col justify-center px-8 py-3">
 
-        <h2>Datos del cliente</h2>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Nombres</mat-label>
-            <input matInput formControlName="nombres">
-          </mat-form-field>
-      
-          <mat-form-field appearance="outline">
-            <mat-label>Apellidos</mat-label>
-            <input matInput formControlName="apellidos">
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Cédula</mat-label>
-            <input matInput formControlName="cedula">
-          </mat-form-field>
-
-
-          <mat-divider></mat-divider>
-
-
           <h2 class="my-2">Libro a prestar</h2>
 
           <mat-form-field appearance="outline">

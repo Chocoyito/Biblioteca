@@ -5,12 +5,14 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { AdministrarLibroComponent } from './administrar-libro/administrar-libro.component';
 import { LibrosRoutingModuleModule } from './libros-routing-module.module';
 import { PrestamoLibroComponent } from './prestamo-libro/prestamo-libro.component';
+import { ListaPredevComponent } from './lista-predev/lista-predev.component';
 
 
 @NgModule({
   declarations: [
     AdministrarLibroComponent,
-    PrestamoLibroComponent
+    PrestamoLibroComponent,
+    ListaPredevComponent
   ],
   imports: [
     CommonModule,

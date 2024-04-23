@@ -35,9 +35,17 @@ export class SidebarComponent implements OnInit {
     this.router.navigate([url]);
   }
 
-  listarLibrosEnPosesion(){
-    this.appService.setTitulo('Libros en posesión');
-    this.appService.setEnPosesion(true);
+  listarLibros(enPosesion: boolean){
+    if(enPosesion)
+      this.appService.setTitulo('Libros en posesión');
+    else
+      this.appService.setTitulo('Libros');
+    this.appService.setEnPosesion(enPosesion);
     this.router.navigate(['/dashboard']);
+  }
+
+  cerrarSesion(){
+    this.appService.deleteData();
+    this.router.navigate(['/login']);
   }
 }

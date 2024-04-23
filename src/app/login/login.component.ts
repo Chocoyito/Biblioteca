@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     this.initReactiveForm()
     this.invitado = false
     this.appService.invitado = false
+    this.appService.deleteData()
   }
 
   initReactiveForm() {

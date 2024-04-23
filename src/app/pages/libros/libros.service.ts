@@ -56,7 +56,6 @@ export class LibrosService {
 
   async prestarLibro( persona: Persona, libro: Libro,): Promise<any> {
     try {
-      console.log(`ID DE LIBRO MIERDA${libro.codigo}`);
 
       const response = await firstValueFrom(
         this.endpointService.registrarPrestamo(persona, libro)

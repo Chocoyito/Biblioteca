@@ -49,8 +49,6 @@ export class EndpointService {
     return this.http.post(`${this.urlPersona}${obj.codigo}/BorrowBook`,persona)
   }
 
-  
-
   verLibrosPorDevolver(cedula: string) : Observable<any>{
     return this.http.get(`${this.urlPersona}${cedula}/listBorrowed`)
   }
@@ -65,6 +63,10 @@ export class EndpointService {
 
   cancelarMulta(obj: Multa) : Observable<any>{
     return this.http.put(`${this.urlMulta}pay/${obj.idMulta}`, obj)
+  }
+
+  verPredev() : Observable<any>{
+    return this.http.get(`${this.urlLibro}listPreDev`)
   }
 
 }

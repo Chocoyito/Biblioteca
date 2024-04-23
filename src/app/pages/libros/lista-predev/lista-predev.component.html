@@ -1,0 +1,98 @@
+<div class="flex justify-center">
+    <form [formGroup]="busquedaFormGroup" class="w-full">
+        <div class="grid gap-5">
+            <div class="grid grid-cols-2 tw-rounded-lg mat-elevation-z1 p-3 gap-3z">
+                <ng-container *ngIf="tipoBusqueda.value === 'Cedula'">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Cedula</mat-label>
+                        <input matInput formControlName="cedula">
+                    </mat-form-field>
+                </ng-container>
+
+                <ng-container *ngIf="tipoBusqueda.value === 'CodLibro'">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Codigo de libro</mat-label>
+                        <input matInput formControlName="codigo">
+                    </mat-form-field>
+                </ng-container>
+
+                <ng-container *ngIf="tipoBusqueda.value === 'Fecha'">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Fecha</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="fecha">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </ng-container>
+
+                <ng-container *ngIf="tipoBusqueda.value === 'Tipo'">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tipo</mat-label>
+                        <mat-select formControlName="tipo">
+                            <mat-option value="false">Prestamo</mat-option>
+                            <mat-option value="true">Devolucion</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Tipo de busqueda</mat-label>
+                    <mat-select formControlName="tipoBusqueda" #tipoBusqueda>
+                        <mat-option *ngFor="let busqueda of busquedas" [value]="busqueda">
+                            {{ busqueda }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <ng-container #tabla>
+                <table mat-table [dataSource]="data">
+                    <div>
+                        <h5 class="tw-text-lg tw-py-4">Búsqueda de Prestamos & Devoluciones</h5>
+                    </div>
+
+                    <ng-container matColumnDef="codigo">
+                        <th mat-header-cell *matHeaderCellDef> Codigo </th>
+                        <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="titulo">
+                        <th mat-header-cell *matHeaderCellDef> Titulo </th>
+                        <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cedula">
+                        <th mat-header-cell *matHeaderCellDef> Cedula </th>
+                        <td mat-cell *matCellDef="let element"> {{element.cedula}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="apellido">
+                        <th mat-header-cell *matHeaderCellDef> Apellido </th>
+                        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                        <td mat-cell *matCellDef="let element"> {{ parseoFecha(element.fecha)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="tipo">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element">
+                            <mat-icon class="green-color" *ngIf="element.tipo === true">arrow_upward</mat-icon>
+                            <mat-icon class="red-color" *ngIf="element.tipo === false">arrow_downward</mat-icon>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row class="tw-sticky tw-top-0" *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </ng-container>
+        </div>
+    </form>
+</div>

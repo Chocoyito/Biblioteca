@@ -7,10 +7,12 @@ import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MultasComponent } from './multas/multas.component';
+import { ListaPredevComponent } from './libros/lista-predev/lista-predev.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'multas', component: MultasComponent },
+  { path: 'prestamosDevoluciones', component: ListaPredevComponent },
   {
     path: 'libros',
     loadChildren: () => import('src/app/pages/libros/libros.module').then(m => m.LibrosModule),

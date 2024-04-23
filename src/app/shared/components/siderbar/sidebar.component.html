@@ -8,14 +8,18 @@
         <label *ngIf="invitado">{{ obtenerNombrePersona() }}</label>
       </div>
       <div *ngIf="!invitado" class="flex flex-col gap-4 text-center">
-
+        <div>
+          <a class="link" (click)="listarLibros(false)">
+            Inicio
+          </a>
+        </div>
         <div>
           <a class="link" (click)="onClickNavigate('/libros/administrar/agregar')">
             Agregar libro
           </a>
         </div>
         <div>
-          <a class="link" (click)="onClickNavigate('/libros/prestar')">
+          <a class="link" (click)="onClickNavigate('/prestamosDevoluciones')">
             Prestamos y devoluciones
           </a>
         </div>
@@ -28,14 +32,19 @@
 
       <div *ngIf="invitado" class="flex flex-col gap-4 text-center">
         <div>
-          <a class="link" (click)="listarLibrosEnPosesion()">
+          <a class="link" (click)="listarLibros(false)">
+            Inicio
+          </a>
+        </div>
+        <div>
+          <a class="link" (click)="listarLibros(true)">
             Listar libros en posesión
           </a>
         </div>
       </div>
 
       <div>
-        <a href="" class="logout" (click)="onClickNavigate('login')">
+        <a href="" class="logout" (click)="cerrarSesion()">
           Cerrar sesión 
         </a>
       </div>

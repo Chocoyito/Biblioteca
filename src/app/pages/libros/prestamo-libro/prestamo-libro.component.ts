@@ -5,6 +5,7 @@ import { LibrosService } from '../libros.service';
 import { Libro } from 'src/app/types/libro.type';
 import { Persona } from 'src/app/types/persona.type';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-prestamo-libro',
@@ -15,7 +16,6 @@ export class PrestamoLibroComponent implements OnInit {
 
   prestamoForm: FormGroup
   libro: Libro = {} as Libro;
-  persona: Persona = {} as Persona;
   libroSeleccionado: Libro = {} as Libro;
   rutaActual: any;
 
@@ -23,7 +23,8 @@ export class PrestamoLibroComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private librosService: LibrosService,
-    private snackBar: MatSnackBar // Inyectar MatSnackBar
+    private snackBar: MatSnackBar, // Inyectar MatSnackBar
+    private appService: AppService
   ) { }
 
   ngOnInit(): void {
@@ -60,18 +61,9 @@ export class PrestamoLibroComponent implements OnInit {
         idLibro: this.prestamoForm.get('idLibro')?.value           
       };
   
-      this.persona = {
-        nombre: this.prestamoForm.get('nombres')?.value,
-        apellido: this.prestamoForm.get('apellidos')?.value,
-        cedula: this.prestamoForm.get('cedula')?.value,     
-      };
-  
-      this.librosService.prestarLibro(this.persona, this.libro).then(result => {
-        this.router.navigate(['dashboard']);
-       this.mostrarSnackBar('Préstamo exitoso');
+      this.librosService.prestarLibro(this.appService.persona, this.libro).then(result => {
         resolve(result);
       }).catch(error => {
-        console.error('Error al solicitar préstamo:', error);
         this.mostrarSnackBar('Error al solicitar préstamo');
         resolve(error);
       });
@@ -103,14 +95,16 @@ export class PrestamoLibroComponent implements OnInit {
     })
   }
 
-  
-
-
-
-
   onSubmit() {
-        this.procesarPrestamo()
-    
+        this.procesarPrestamo().then(result => {
+          console.log(result);
+          if(result == 'REGISTRO ACTUALIZADO'){
+            this.mostrarSnackBar('Préstamo solicitado con éxito');
+            this.router.navigate(['dashboard'])
+          } else {
+            this.mostrarSnackBar(result);
+          }
+        });
   }
 
   volver() {

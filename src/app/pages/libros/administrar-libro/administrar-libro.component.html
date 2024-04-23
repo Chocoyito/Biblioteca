@@ -3,17 +3,22 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Titulo</mat-label>
-      <input matInput formControlName="titulo">
+      <input matInput formControlName="titulo" maxlength="100">
+      <mat-error *ngIf="libroForm.get('titulo').hasError('required')">El titulo es requerido</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Autor</mat-label>
-      <input matInput formControlName="autor">
+      <input matInput formControlName="autor" maxlength="40">
+      <mat-error *ngIf="libroForm.get('autor').hasError('required')">El autor es requerido</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Año de edición</mat-label>
-      <input matInput formControlName="anoEdicion">
+      <input matInput formControlName="anoEdicion" maxlength="4" minlength="4" pattern="^[0-9]*$">
+      <mat-error *ngIf="libroForm.get('anoEdicion').hasError('required')">El año de edición es requerido</mat-error>
+      <mat-error *ngIf="libroForm.get('anoEdicion').hasError('minlength')">El año de edición debe ser 4 digitos</mat-error>
+      <mat-error *ngIf="libroForm.get('anoEdicion').hasError('pattern')">El año de edición debe ser numerico</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
@@ -21,6 +26,7 @@
       <mat-select formControlName="genero">
         <mat-option *ngFor="let genero of generos" [value]="genero">{{ genero }}</mat-option>
       </mat-select>
+      <mat-error *ngIf="libroForm.get('genero').hasError('required')">El genero es requerido</mat-error>
     </mat-form-field>
 
     <ng-container *ngIf="rutaActual === 'visualizar'">
@@ -41,7 +47,7 @@
     <div class="grid grid-cols-2 gap-3">
       <button mat-raised-button color="accent" (click)="volver()" type="button">Volver</button>
       <!-- <button *ngIf="this.rutaActual === 'editar'" mat-raised-button color="primary" type="submit" [disabled]="!libroForm.valid">{{ nombreBoton() }}</button> -->
-      <button mat-raised-button color="primary" type="submit">{{ nombreBoton() }}</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="this.libroForm.invalid">{{ nombreBoton() }}</button>
     </div>
   </div>
 

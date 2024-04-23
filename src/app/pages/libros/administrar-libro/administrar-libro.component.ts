@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LibrosService } from '../libros.service';
 import { Libro } from 'src/app/types/libro.type';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-administrar-libro',
@@ -13,6 +14,8 @@ export class AdministrarLibroComponent implements OnInit {
 
   libroForm: FormGroup;
   rutaActual: any;
+
+  regexSoloNumeros = '^[0-9]*$';
 
   libro: Libro = {} as Libro;
   libroSeleccionado: Libro = {} as Libro;
@@ -25,6 +28,7 @@ export class AdministrarLibroComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private librosService: LibrosService,
+    private appService: AppService
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +36,7 @@ export class AdministrarLibroComponent implements OnInit {
     this.obtenerRuta()
 
     if(this.rutaActual === 'visualizar'){
+      this.appService.setTitulo('Visualizar Libro')
       this.libroSeleccionado = this.librosService.getLibroSeleccionado()
 
       // console.log(this.libroSeleccionado);
@@ -45,6 +50,7 @@ export class AdministrarLibroComponent implements OnInit {
       this.libroForm.disable()
     }
     else if (this.rutaActual === 'editar') {
+      this.appService.setTitulo('Editar Libro')
       this.libroSeleccionado = this.librosService.getLibroSeleccionado()
       this.libroForm.get('id')?.setValue(this.libroSeleccionado.idLibro)
       this.libroForm.get('titulo')?.setValue(this.libroSeleccionado.titulo)
@@ -53,14 +59,17 @@ export class AdministrarLibroComponent implements OnInit {
       this.libroForm.get('genero')?.setValue(this.libroSeleccionado.genero)
       this.libroForm.get('codigo')?.setValue(this.libroSeleccionado.codigo)
     }
+    else {
+      this.appService.setTitulo('Agregar Libro')
+    }
   }
 
   initReactiveForm() {
     this.libroForm = this.formBuilder.group({
-      titulo: [''],
-      autor: [''],
-      anoEdicion: [''],
-      genero: [''],
+      titulo: ['', Validators.required],
+      autor: ['', Validators.required],
+      anoEdicion: ['', Validators.required],
+      genero: ['', Validators.required],
       codigo: [''],
       id: ['']
     })

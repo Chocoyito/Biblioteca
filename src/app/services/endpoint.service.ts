@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Libro } from '../types/libro.type';
 import { Usuario } from '../types/usuario.type';
 import { Persona } from '../types/persona.type';
+import { Multa } from '../types/multa.type';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,10 @@ export class EndpointService {
 
   urlLibro: string = 'http://localhost:8080/book/';
   urlUsuario: string = 'http://localhost:8080/';
+
+
+  urlMulta: string = 'http://localhost:8080/latefee/';
+
   urlPersona: string = 'http://localhost:8080/person/';
 
 
@@ -44,5 +50,21 @@ export class EndpointService {
   }
 
   
+
+  verLibrosPorDevolver(cedula: string) : Observable<any>{
+    return this.http.get(`${this.urlPersona}${cedula}/listBorrowed`)
+  }
+
+  devolverLibro(obj: Libro) : Observable<any>{
+    return this.http.put(`${this.urlPersona}${obj.idLibro}/returnBook`, obj)
+  }
+
+  verMultas() : Observable<any>{
+    return this.http.get(`${this.urlMulta}list`)
+  }
+
+  cancelarMulta(obj: Multa) : Observable<any>{
+    return this.http.put(`${this.urlMulta}pay/${obj.idMulta}`, obj)
+  }
 
 }

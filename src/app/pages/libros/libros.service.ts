@@ -34,6 +34,10 @@ export class LibrosService {
     return this.endpointService.verLibros()
   }
 
+  verLibrosPorDevolver(cedula: string): Observable<any>{
+    return this.endpointService.verLibrosPorDevolver(cedula)
+  }
+
   // guardarLibro(objeto: any): Observable<any>{
   //   return this.endpointService.guardarLibros(objeto) 
   // }
@@ -89,11 +93,15 @@ export class LibrosService {
     }
   }
 
-  // obtenerListaLibros(): Observable<any>{
-  //   return this.http.get(this.url) 
-  // }
+  async devolverLibro(libro: Libro): Promise<any> {
+    try {
+      const response = await firstValueFrom(
+        this.endpointService.devolverLibro(libro)
+      );
 
-  // editarLibro(objeto: any): Observable<any>{
-  //   return this.http.put(this.url, objeto) 
-  // }
+      return response;
+    } catch (error) {
+      return error.error;
+    }
+  }
 }

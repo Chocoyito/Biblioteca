@@ -11,6 +11,8 @@ import { Persona } from 'src/app/types/persona.type';
 export class SidebarComponent implements OnInit {
 
   persona: Persona = {} as Persona;
+  username: string
+  invitado: boolean;
 
   constructor(
     private router: Router,
@@ -19,6 +21,8 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.persona = this.appService.persona;
+    this.username = this.appService.usuario;
+    this.invitado = this.appService.invitado;
     console.log(`Persona: ${this.persona}`);
     
   }
@@ -31,4 +35,9 @@ export class SidebarComponent implements OnInit {
     this.router.navigate([url]);
   }
 
+  listarLibrosEnPosesion(){
+    this.appService.setTitulo('Libros en posesión');
+    this.appService.setEnPosesion(true);
+    this.router.navigate(['/dashboard']);
+  }
 }

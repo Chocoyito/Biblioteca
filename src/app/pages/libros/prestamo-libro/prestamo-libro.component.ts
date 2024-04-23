@@ -17,6 +17,8 @@ export class PrestamoLibroComponent implements OnInit {
   prestamoForm: FormGroup
   libro: Libro = {} as Libro;
   libroSeleccionado: Libro = {} as Libro;
+  persona: Persona = {} as Persona;
+
   rutaActual: any;
 
   constructor(

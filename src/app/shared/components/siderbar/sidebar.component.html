@@ -10,17 +10,17 @@
       <div *ngIf="!invitado" class="flex flex-col gap-4 text-center">
         <div>
           <a class="link" (click)="listarLibros(false)">
-            Inicio
+            Libros
           </a>
         </div>
         <div>
           <a class="link" (click)="onClickNavigate('/libros/administrar/agregar')">
-            Agregar libro
+            Agregar Libro
           </a>
         </div>
         <div>
           <a class="link" (click)="onClickNavigate('/prestamosDevoluciones')">
-            Prestamos y devoluciones
+            Prestamos & Devoluciones
           </a>
         </div>
         <div>
@@ -33,12 +33,12 @@
       <div *ngIf="invitado" class="flex flex-col gap-4 text-center">
         <div>
           <a class="link" (click)="listarLibros(false)">
-            Inicio
+            Libros
           </a>
         </div>
         <div>
           <a class="link" (click)="listarLibros(true)">
-            Libros en posesión
+            Libros en Posesión
           </a>
         </div>
       </div>

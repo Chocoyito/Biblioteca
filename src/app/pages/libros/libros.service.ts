@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, firstValueFrom } from 'rxjs';
-import { LibrosEndpointService } from 'src/app/services/libros-endpoint.service';
+import { EndpointService } from 'src/app/services/endpoint.service';
 import { Libro } from 'src/app/types/libro.type';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class LibrosService {
   data: Libro[] = []; 
 
   constructor(
-    private librosEndpointService: LibrosEndpointService
+    private endpointService: EndpointService
   ) { }
 
   obtenerListaLibros(){
@@ -29,22 +29,18 @@ export class LibrosService {
     return this.libro
   }
 
-
-  url: string = 'http://localhost:3000/libros';
-
-  
   verLibros(): Observable<any>{
-    return this.librosEndpointService.verLibros()
+    return this.endpointService.verLibros()
   }
 
   // guardarLibro(objeto: any): Observable<any>{
-  //   return this.librosEndpointService.guardarLibros(objeto) 
+  //   return this.endpointService.guardarLibros(objeto) 
   // }
 
   async guardarLibros(libro: Libro): Promise<any> {
     try {
       const response = await firstValueFrom(
-        this.librosEndpointService.guardarLibros(libro)
+        this.endpointService.guardarLibros(libro)
       );
 
       return response;
@@ -56,7 +52,7 @@ export class LibrosService {
   async editarLibro(libro: Libro): Promise<any> {
     try {
       const response = await firstValueFrom(
-        this.librosEndpointService.editarLibro(libro)
+        this.endpointService.editarLibro(libro)
       );
 
       return response;
@@ -68,7 +64,7 @@ export class LibrosService {
   async eliminarLibro(libro: Libro): Promise<any> {
     try {
       const response = await firstValueFrom(
-        this.librosEndpointService.eliminarLibro(libro)
+        this.endpointService.eliminarLibro(libro)
       );
 
       return response;

@@ -29,17 +29,25 @@ export class PrestamoLibroComponent implements OnInit {
 
   ngOnInit(): void {
     this.initReactiveForm()
-
     this.libroSeleccionado = this.librosService.getLibroSeleccionado()
-
+    //Inicializar persona con los datos de localstorage
+    const personaJSON = localStorage.getItem('persona');
+      this.persona = localStorage.getItem('persona') ? JSON.parse(personaJSON) : {} as Persona;
+      console.log(this.persona);
     console.log(this.libroSeleccionado);
     
 
     if(this.libroSeleccionado){
+
+      //Localstorage para mostrar al invitado
+      this.prestamoForm.get('nombres')?.setValue(this.persona.nombre)
+      this.prestamoForm.get('apellidos')?.setValue(this.persona.apellido)
+      this.prestamoForm.get('cedula')?.setValue(this.persona.cedula)
       this.prestamoForm.get('codigo')?.setValue(this.libroSeleccionado.idLibro)
       this.prestamoForm.get('titulo')?.setValue(this.libroSeleccionado.titulo)
       this.prestamoForm.get('autor')?.setValue(this.libroSeleccionado.autor)
      // this.prestamoForm.get('codigo')?.setValue(this.libroSeleccionado.codigo)
+     
      
       this.prestamoForm.get('fechaPrestamo')?.setValue(new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate())
 
@@ -68,6 +76,10 @@ export class PrestamoLibroComponent implements OnInit {
         resolve(error);
       });
     });
+  }
+
+  obtenerNombrePersona(){
+    return this.persona.nombre + ' ' + this.persona.apellido+ ' ' + this.persona.cedula;
   }
   
   mostrarSnackBar(mensaje: string): void {

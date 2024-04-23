@@ -54,9 +54,8 @@ export class LibrosService {
     }
   }
 
-  async prestarLibro( persona: Persona, libro: Libro,): Promise<any> {
+  async prestarLibro(persona: Persona, libro: Libro): Promise<any> {
     try {
-
       const response = await firstValueFrom(
         this.endpointService.registrarPrestamo(persona, libro)
       );

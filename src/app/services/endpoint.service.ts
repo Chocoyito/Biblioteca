@@ -50,7 +50,7 @@ export class EndpointService {
   }
   
   registrarPrestamo( persona: Persona, obj: Libro,) : Observable<any>{
-    return this.http.post(`${this.urlPersona}${obj.codigo}/BorrowBook`,persona)
+    return this.http.post(`${this.urlPersona}${obj.idLibro}/BorrowBook`, persona)
   }
 
   verLibrosPorDevolver(cedula: string) : Observable<any>{

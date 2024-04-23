@@ -33,15 +33,14 @@ export class PrestamoLibroComponent implements OnInit {
     this.libroSeleccionado = this.librosService.getLibroSeleccionado()
 
     console.log(this.libroSeleccionado);
-    
 
-    if(this.libroSeleccionado){
-      this.prestamoForm.get('codigo')?.setValue(this.libroSeleccionado.idLibro)
+
+    if (this.libroSeleccionado) {
+      this.prestamoForm.get('codigo')?.setValue(this.libroSeleccionado.codigo)
       this.prestamoForm.get('titulo')?.setValue(this.libroSeleccionado.titulo)
       this.prestamoForm.get('autor')?.setValue(this.libroSeleccionado.autor)
-     // this.prestamoForm.get('codigo')?.setValue(this.libroSeleccionado.codigo)
-     
       this.prestamoForm.get('fechaPrestamo')?.setValue(new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate())
+      this.prestamoForm.get('idLibro')?.setValue(this.libroSeleccionado.idLibro)
 
       this.prestamoForm.get('titulo')?.disable()
       this.prestamoForm.get('autor')?.disable()
@@ -57,10 +56,10 @@ export class PrestamoLibroComponent implements OnInit {
         autor: this.prestamoForm.get('autor')?.value,
         anioEdicion: this.prestamoForm.get('anoEdicion')?.value,
         genero: this.prestamoForm.get('genero')?.value,
-        codigo: this.prestamoForm.get('codigo')?.value,  
-        idLibro: this.prestamoForm.get('idLibro')?.value           
+        codigo: this.prestamoForm.get('codigo')?.value,
+        idLibro: this.prestamoForm.get('idLibro')?.value
       };
-  
+
       this.librosService.prestarLibro(this.appService.persona, this.libro).then(result => {
         resolve(result);
       }).catch(error => {
@@ -69,20 +68,20 @@ export class PrestamoLibroComponent implements OnInit {
       });
     });
   }
-  
+
   mostrarSnackBar(mensaje: string): void {
     const snackBarRef = this.snackBar.open(mensaje, 'Cerrar', {
       duration: 3000, // Duración del Snackbar en milisegundos
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });
-  
+
     snackBarRef.afterDismissed().subscribe(() => {
       console.log('SnackBar cerrado');
     });
   }
-  
-  initReactiveForm(){
+
+  initReactiveForm() {
     this.prestamoForm = this.formBuilder.group({
       nombres: [''],
       apellidos: [''],
@@ -91,20 +90,20 @@ export class PrestamoLibroComponent implements OnInit {
       titulo: [''],
       autor: [''],
       codigo: [''],
-
+      idLibro: ['']
     })
   }
 
   onSubmit() {
-        this.procesarPrestamo().then(result => {
-          console.log(result);
-          if(result == 'REGISTRO ACTUALIZADO'){
-            this.mostrarSnackBar('Préstamo solicitado con éxito');
-            this.router.navigate(['dashboard'])
-          } else {
-            this.mostrarSnackBar(result);
-          }
-        });
+    this.procesarPrestamo().then(result => {
+      console.log(result);
+      if (result.text == 'REGISTRO ACTUALIZADO') {
+        this.mostrarSnackBar('Préstamo solicitado con éxito');
+        this.router.navigate(['dashboard'])
+      } else {
+        this.mostrarSnackBar(result.text);
+      }
+    });
   }
 
   volver() {
